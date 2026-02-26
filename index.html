@@ -116,9 +116,52 @@
 					<button type="button" id="play" class="btn btn-primary">Reproducir</button>
 					<button type="button" id="pause" class="btn btn-primary">Pausar</button>
 				</div>
+			
+				<div id="drumSet">
+					<button type="button" id="KeyW" class="btn btn-secondary">Tambor 1</button>
+					<button type="button" id="KeyA" class="btn btn-secondary">Tambor 2</button>
+					<button type="button" id="KeyS" class="btn btn-secondary">Tambor 3</button>
+					<button type="button" id="KeyD" class="btn btn-secondary">Tambor 4</button>
+					<button type="button" id="KeyJ" class="btn btn-secondary">Snare</button>
+					<button type="button" id="KeyK" class="btn btn-secondary">Crash</button>
+					<button type="button" id="KeyL" class="btn btn-secondary">Kick Bass</button>
 
+
+
+				</div>
 				<script type="text/javascript">
-					window.onload = () =>{
+					const sounds = {
+						'KeyW' : 'https://www.virtualdruming.com/drums/virtual-drum-sounds/hip-hop/tom1.ogg',
+						'KeyA' : 'https://www.virtualdruming.com/drums/virtual-drum-sounds/hip-hop/tom2.ogg',
+						'KeyS' : 'https://www.virtualdruming.com/drums/virtual-drum-sounds/hip-hop/tom3.ogg',
+						'KeyD' : 'https://www.virtualdruming.com/drums/virtual-drum-sounds/hip-hop/pad1.ogg',
+						'KeyJ' : 'https://www.virtualdruming.com/drums/virtual-drum-sounds/hip-hop/snare1.ogg',
+						'KeyK' : 'https://www.virtualdruming.com/drums/virtual-drum-sounds/crash1.ogg',
+						'KeyL' : 'https://www.virtualdruming.com/drums/virtual-drum-sounds/hip-hop/kick.ogg'
+					}
+
+					const play = sound =>{
+						console.log("Sonando: ", sound);
+						var  audio = new Audio(sound);
+						audio.play();
+
+					}
+					//captura indice del arreglo del sonido
+					document.getElementById('drumSet').addEventListener('click', function(e){
+						const tgt = e.target.closest('button');
+						if(tgt) play(sounds[tgt.id]);
+					});
+
+					//Ejecucion de sonido a partir del evento KeyPress
+					window.addEventListener('keypress', function(e){
+						console.log(e.code)
+						if(sounds[e.code]){
+							console.log("presionando la tecla ", e.code);
+							document.getElementById(e.code).click();
+						}
+					})
+
+					/*window.onload = () =>{
 						const audio = document.getElementById("Reproductor");
 						const play = document.getElementById("play");
 						const pause = document.getElementById("pause");
@@ -133,7 +176,7 @@
 							audio.pause();
 						}
 					}
-
+*/
 				</script>
 			</div>
 		</main>
